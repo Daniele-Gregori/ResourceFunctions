@@ -1,4 +1,4 @@
-# Resource-Functions
+# Resource Functions
 Here I collect the Resource Functions I developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/):
 
 * [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
