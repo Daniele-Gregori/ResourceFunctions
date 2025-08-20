@@ -1,5 +1,5 @@
 # Resource Functions
-Here I collect the Resource Functions I developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/):
+The Resource Functions I developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/):
 
 * [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
 
@@ -11,4 +11,4 @@ Here I collect the Resource Functions I developed for the [Wolfram Function Repo
 
 To see their documentation, click the corresponding links.
 
-The most important one, FindClosedForm, is also in a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm).
+The most important one, FindClosedForm, has also a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm).
