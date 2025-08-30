@@ -7,7 +7,9 @@ The Resource Functions I developed for the [Wolfram Function Repository](https:/
 
 * [ComplexRange](https://resources.wolframcloud.com/FunctionRepository/resources/ComplexRange/): generate a range of complex numbers;
 
-* [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number.
+* [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number;
+
+* [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular.
 
 To see their documentation, click the corresponding links.
 
