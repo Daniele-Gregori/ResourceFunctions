@@ -11,6 +11,6 @@ The Resource Functions I developed for the [Wolfram Function Repository](https:/
 
 * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular.
 
-To see their documentation, click the corresponding links.
+To read their documentation, click the corresponding links.
 
 The most important one, FindClosedForm, has also a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm).
