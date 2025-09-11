@@ -1,16 +1,20 @@
 # Resource Functions
-The Resource Functions I developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/):
+The Resource Functions I developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) fall mainly in two groups:
 
-* [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
+* Functions for mathematical computation:
 
-* [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
+  * [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
 
-* [ComplexRange](https://resources.wolframcloud.com/FunctionRepository/resources/ComplexRange/): generate a range of complex numbers;
+  * [ComplexRange](https://resources.wolframcloud.com/FunctionRepository/resources/ComplexRange/): generate a range of complex numbers;
 
-* [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number;
+  * [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number (also in a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm));
 
-* [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular.
+* Functions for data manipulation and analysis:
 
-To read their documentation, click the corresponding links.
+  * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
 
-The most important one, FindClosedForm, has also a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm).
+
+  * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular.
+
+To read the documentation of each, click the corresponding links.
+
