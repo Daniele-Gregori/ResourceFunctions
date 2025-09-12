@@ -16,5 +16,5 @@ The Resource Functions I developed for the [Wolfram Function Repository](https:/
 
   * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular.
 
-To read the documentation of each, click the corresponding links.
+To read the documentation for each of these functions, click the corresponding links.
 
