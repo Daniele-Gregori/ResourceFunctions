@@ -1,5 +1,5 @@
 # Resource Functions
-The Resource Functions I developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) fall mainly in two groups:
+The Resource Functions I have developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) fall mainly in two groups:
 
 * Functions for mathematical computation:
 
