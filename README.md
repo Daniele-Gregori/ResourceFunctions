@@ -1,5 +1,5 @@
 # Resource Functions
-The Resource Functions I have developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) fall mainly in two groups:
+The Resource Functions I have developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) categorize mainly as follows:
 
 * Functions for mathematical computation:
 
@@ -14,7 +14,11 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
   * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
 
 
-  * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular.
+  * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular object;
+
+* Functions for time computation:
+
+  * [PauseUntil](https://resources.wolframcloud.com/FunctionRepository/resources/PauseUntil/): pause evaluation until a given time.
 
 To read the documentation for each of these functions, click the corresponding links.
 
