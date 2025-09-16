@@ -16,7 +16,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular object;
 
-* Functions for time computation:
+* Functions for time-related computation:
 
   * [PauseUntil](https://resources.wolframcloud.com/FunctionRepository/resources/PauseUntil/): pause evaluation until a given time.
 
