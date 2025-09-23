@@ -9,7 +9,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
  
   * [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
 
-  * [ThermodynamicBetheAnsatzSolve](https://resources.wolframcloud.com/FunctionRepository/resources/ThermodynamicBetheAnsatzSolve/): solve integral equations of Thermodynamic Bethe Ansatz type (also in a [separate repository](https://github.com/Daniele-Gregori/ThermodynamicBetheAnsatz);
+  * [ThermodynamicBetheAnsatzSolve](https://resources.wolframcloud.com/FunctionRepository/resources/ThermodynamicBetheAnsatzSolve/): solve integral equations of Thermodynamic Bethe Ansatz type (also in a [separate repository](https://github.com/Daniele-Gregori/ThermodynamicBetheAnsatz));
   
 
 * Functions for data manipulation and analysis:
