@@ -7,7 +7,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number (also in a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm));
  
-  # [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
+  * [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
 
   * [ThermodynamicBetheAnsatzSolve](https://resources.wolframcloud.com/FunctionRepository/resources/ThermodynamicBetheAnsatzSolve/): solve integral equations of Thermodynamic Bethe Ansatz type (also in a [separate repository](https://github.com/Daniele-Gregori/ThermodynamicBetheAnsatz);
   
