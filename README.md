@@ -3,18 +3,21 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
 * Functions for mathematical computation:
 
-  * [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
-
   * [ComplexRange](https://resources.wolframcloud.com/FunctionRepository/resources/ComplexRange/): generate a range of complex numbers;
 
   * [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number (also in a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm));
+ 
+  # [ODENormalForm](https://resources.wolframcloud.com/FunctionRepository/resources/ODENormalForm/): transform a differential equation into normal form;
+
+  * [ThermodynamicBetheAnsatzSolve](https://resources.wolframcloud.com/FunctionRepository/resources/ThermodynamicBetheAnsatzSolve/): solve integral equations of Thermodynamic Bethe Ansatz type (also in a [separate repository](https://github.com/Daniele-Gregori/ThermodynamicBetheAnsatz);
+  
 
 * Functions for data manipulation and analysis:
 
-  * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
-
-
   * [AssociateColumns](https://resources.wolframcloud.com/FunctionRepository/resources/AssociateColumns/): create associations among columns of a tabular object;
+
+  * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
+ 
 
 * Functions for time-related computation:
 
