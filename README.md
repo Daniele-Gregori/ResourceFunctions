@@ -3,6 +3,8 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
 * Functions for mathematical computation:
 
+  * [AlgebraicRange](https://resources.wolframcloud.com/FunctionRepository/resources/AlgebraicRange/): generate ranges of algebraic numbers;
+
   * [ComplexRange](https://resources.wolframcloud.com/FunctionRepository/resources/ComplexRange/): generate a range of complex numbers;
 
   * [FindClosedForm](https://resources.wolframcloud.com/FunctionRepository/resources/FindClosedForm/): search for a formula that yields a given number (also in a [separate repository](https://github.com/Daniele-Gregori/FindClosedForm));
@@ -19,7 +21,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
   * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
  
 
-* Functions for time-related computation:
+* Functions for system management:
 
   * [PauseUntil](https://resources.wolframcloud.com/FunctionRepository/resources/PauseUntil/): pause evaluation until a given time.
 
