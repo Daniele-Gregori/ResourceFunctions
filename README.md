@@ -1,6 +1,11 @@
 # Resource Functions
 The Resource Functions I have developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) categorize mainly as follows:
 
+
+* Functions for core computation:
+
+  * [PartitionWhile](https://resources.wolframcloud.com/FunctionRepository/resources/PartitionWhile/): partition a list by a condition on the sublists;
+
 * Functions for mathematical computation:
 
   * [AlgebraicRange](https://resources.wolframcloud.com/FunctionRepository/resources/AlgebraicRange/): generate ranges of algebraic numbers;
