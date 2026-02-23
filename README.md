@@ -30,5 +30,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [PauseUntil](https://resources.wolframcloud.com/FunctionRepository/resources/PauseUntil/): pause evaluation until a given time.
 
-To read the documentation for each of these functions, click the corresponding links.
+To read the **documentation** for each of these functions, click the corresponding links.
+
+Some of these functions have also been translated into **PyPI Python packages** and can be found at the [corresponding repository](https://github.com/Daniele-Gregori/PyPI-packages)).
 
