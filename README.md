@@ -18,6 +18,8 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [ThermodynamicBetheAnsatzSolve](https://resources.wolframcloud.com/FunctionRepository/resources/ThermodynamicBetheAnsatzSolve/): solve integral equations of Thermodynamic Bethe Ansatz type (also in a [separate repository](https://github.com/Daniele-Gregori/ThermodynamicBetheAnsatz));
   
+  * [TranscendentalRange](https://resources.wolframcloud.com/FunctionRepository/resources/TranscendentalRange/): generate ranges of transcendental numbers;
+
 
 * Functions for data manipulation and analysis:
 
