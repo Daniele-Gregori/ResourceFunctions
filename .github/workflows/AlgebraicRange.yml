@@ -17,24 +17,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Pull Wolfram Engine image
-        run: docker pull wolframresearch/wolframengine:14.2.0
-
-      - name: Activate Wolfram Engine
-        run: |
-          docker run --rm \
-            -e WOLFRAM_PRODUCT_KEY=${{ secrets.WOLFRAM_PRODUCT_KEY }} \
-            -v "${{ github.workspace }}:/workspace" \
-            wolframresearch/wolframengine:14.2.0 \
-            wolframscript -code 'Print[$Version]'
-
       - name: Run AlgebraicRange tests
         run: |
           docker run --rm \
-            -e WOLFRAM_PRODUCT_KEY=${{ secrets.WOLFRAM_PRODUCT_KEY }} \
+            -e WOLFRAMSCRIPT_ENTITLEMENTID=${{ secrets.WOLFRAM_PRODUCT_KEY }} \
             -v "${{ github.workspace }}:/workspace" \
             wolframresearch/wolframengine:14.2.0 \
             wolframscript -code '
+              Print["Wolfram Engine ", $Version];
               report = TestReport["/workspace/Functions/AlgebraicRange/Tests/AlgebraicRange-tests.wlt"];
               Print["Tests run:    ", report["TestsSucceededCount"] + report["TestsFailedCount"]];
               Print["Passed:       ", report["TestsSucceededCount"]];
