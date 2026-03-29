@@ -12,35 +12,37 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: wolframresearch/wolframengine:14.2.0
-      options: --user root
-    env:
-      WOLFRAM_PRODUCT_KEY: ${{ secrets.WOLFRAM_PRODUCT_KEY }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Pull Wolfram Engine image
+        run: docker pull wolframresearch/wolframengine:14.2.0
+
       - name: Activate Wolfram Engine
         run: |
-          wolframscript -activate
-          wolframscript -code 'Print[$Version]' || {
-            echo "::error::Wolfram Engine activation failed. Check WOLFRAM_PRODUCT_KEY secret."
-            exit 1
-          }
+          docker run --rm \
+            -e WOLFRAM_PRODUCT_KEY=${{ secrets.WOLFRAM_PRODUCT_KEY }} \
+            -v "${{ github.workspace }}:/workspace" \
+            wolframresearch/wolframengine:14.2.0 \
+            wolframscript -code 'Print[$Version]'
 
       - name: Run AlgebraicRange tests
         run: |
-          wolframscript -code '
-            report = TestReport["Functions/AlgebraicRange/Tests/AlgebraicRange-tests.wlt"];
-            Print["Tests run:    ", report["TestsSucceededCount"] + report["TestsFailedCount"]];
-            Print["Passed:       ", report["TestsSucceededCount"]];
-            Print["Failed:       ", report["TestsFailedCount"]];
-            If[report["TestsFailedCount"] > 0,
-              Print["\nFailed tests:"];
-              Scan[Print["  ", #TestID, " \[Rule] ", #Outcome] &,
-                Values @ Select[report["TestResults"], #Outcome =!= "Success" &]];
-            ];
-            Exit[If[report["AllTestsSucceeded"], 0, 1]]
-          '
+          docker run --rm \
+            -e WOLFRAM_PRODUCT_KEY=${{ secrets.WOLFRAM_PRODUCT_KEY }} \
+            -v "${{ github.workspace }}:/workspace" \
+            wolframresearch/wolframengine:14.2.0 \
+            wolframscript -code '
+              report = TestReport["/workspace/Functions/AlgebraicRange/Tests/AlgebraicRange-tests.wlt"];
+              Print["Tests run:    ", report["TestsSucceededCount"] + report["TestsFailedCount"]];
+              Print["Passed:       ", report["TestsSucceededCount"]];
+              Print["Failed:       ", report["TestsFailedCount"]];
+              If[report["TestsFailedCount"] > 0,
+                Print["\nFailed tests:"];
+                Scan[Print["  ", #TestID, " \[Rule] ", #Outcome] &,
+                  Values @ Select[report["TestResults"], #Outcome =!= "Success" &]];
+              ];
+              Exit[If[report["AllTestsSucceeded"], 0, 1]]
+            '
