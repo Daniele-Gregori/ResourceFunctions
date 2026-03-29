@@ -2,12 +2,9 @@ name: Test AlgebraicRange
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'Functions/AlgebraicRange/**'
-  pull_request:
-    paths:
-      - 'Functions/AlgebraicRange/**'
+    inputs:
+      placeholder:
+        description: 'Disabled — cloud runner not configured yet'
 
 env:
   WOLFRAMSCRIPT_ENTITLEMENTID: ${{ secrets.WOLFRAMSCRIPT_ENTITLEMENTID }}
