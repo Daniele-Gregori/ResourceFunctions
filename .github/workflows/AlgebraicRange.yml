@@ -1,6 +1,7 @@
 name: Test AlgebraicRange
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'Functions/AlgebraicRange/**'
