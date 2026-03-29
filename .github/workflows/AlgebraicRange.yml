@@ -1,0 +1,66 @@
+name: Test AlgebraicRange
+
+on:
+  push:
+    paths:
+      - 'Functions/AlgebraicRange/**'
+  pull_request:
+    paths:
+      - 'Functions/AlgebraicRange/**'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Wolfram Engine (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          wget -q https://account.wolfram.com/download/public/wolfram-engine/desktop/LINUX
+          sudo bash LINUX -- -auto
+          sudo ln -sf /usr/local/Wolfram/WolframEngine/*/Executables/wolframscript /usr/local/bin/wolframscript
+
+      - name: Install Wolfram Engine (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install --cask wolfram-engine
+
+      - name: Install Wolfram Engine (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://account.wolfram.com/download/public/wolfram-engine/desktop/WINDOWS" -OutFile WolframEngine.exe
+          Start-Process -Wait -FilePath .\WolframEngine.exe -ArgumentList '/S'
+
+      - name: Activate Wolfram Engine
+        env:
+          WOLFRAM_PRODUCT_KEY: ${{ secrets.WOLFRAM_PRODUCT_KEY }}
+        shell: bash
+        run: |
+          wolframscript -code 'Print[$Version]' || {
+            echo "::error::Wolfram Engine activation failed. Check WOLFRAM_PRODUCT_KEY secret."
+            exit 1
+          }
+
+      - name: Run AlgebraicRange tests
+        shell: bash
+        run: |
+          wolframscript -code '
+            report = TestReport["Functions/AlgebraicRange/Tests/AlgebraicRange-tests.wlt"];
+            Print["Tests run:    ", report["TestsSucceededCount"] + report["TestsFailedCount"]];
+            Print["Passed:       ", report["TestsSucceededCount"]];
+            Print["Failed:       ", report["TestsFailedCount"]];
+            If[report["TestsFailedCount"] > 0,
+              Print["\nFailed tests:"];
+              Scan[Print["  ", #TestID, " \[Rule] ", #Outcome] &,
+                Values @ Select[report["TestResults"], #Outcome =!= "Success" &]];
+            ];
+            Exit[If[report["AllTestsSucceeded"], 0, 1]]
+          '
