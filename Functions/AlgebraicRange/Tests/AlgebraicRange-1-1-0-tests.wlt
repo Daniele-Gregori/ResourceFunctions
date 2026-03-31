@@ -6,7 +6,8 @@
 BeginTestSection["AlgebraicRange Comprehensive Tests"]
 
 (* ---- Setup ---- *)
-AR = ResourceFunction["AlgebraicRange"];
+Get[FileNameJoin[{DirectoryName[$TestFileName], "..", "Kernel", "AlgebraicRange-1-1-0-kernel.wl"}]];
+AR = AlgebraicRange;
 
 (* ================================================================ *)
 (* TEST GROUP 1: Single-Argument Form  AR[x]                        *)
@@ -629,6 +630,281 @@ VerificationTest[
       Element[r, Algebraics] && Element[r, Reals]]],
   True,
   TestID -> "18a-Random-AlgebraicAndReal"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 19: Step Ranges - Mixed Sign (r1 < 0 < r2, s > 0)     *)
+(* ================================================================ *)
+
+VerificationTest[
+  Length[AR[-2, 3, 1/2]] > 0,
+  True,
+  TestID -> "19a-MixedAsc-NonEmpty"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[-2, 3, 1/2]]],
+  True,
+  TestID -> "19b-MixedAsc-SortedAscending"
+]
+
+VerificationTest[
+  MemberQ[AR[-2, 3, 1/2], 0],
+  True,
+  TestID -> "19c-MixedAsc-ContainsZero"
+]
+
+VerificationTest[
+  Max[N @ Differences[AR[-2, 3, 1/2]]] <= 1/2 + 10^-10,
+  True,
+  TestID -> "19d-MixedAsc-StepUpperBound"
+]
+
+VerificationTest[
+  With[{r = AR[-2, 3, 1/2]},
+    {First[r], Last[r]}],
+  {-2, 3},
+  TestID -> "19e-MixedAsc-Endpoints"
+]
+
+VerificationTest[
+  SubsetQ[AR[-2, 3, 1/2], {-2, -1, 0, 1, 2, 3}],
+  True,
+  TestID -> "19f-MixedAsc-ContainsIntegers"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 20: Step Ranges - Both Negative (r1 < r2 < 0, s > 0)  *)
+(* ================================================================ *)
+
+VerificationTest[
+  Length[AR[-3, -1, 1/2]] > 0,
+  True,
+  TestID -> "20a-NegAsc-NonEmpty"
+]
+
+VerificationTest[
+  AllTrue[AR[-3, -1, 1/2], Negative],
+  True,
+  TestID -> "20b-NegAsc-AllNegative"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[-3, -1, 1/2]]],
+  True,
+  TestID -> "20c-NegAsc-SortedAscending"
+]
+
+VerificationTest[
+  AR[-3, -1, 1/2] === Reverse[-AR[1, 3, 1/2]],
+  True,
+  TestID -> "20d-NegAsc-ReflectionProperty"
+]
+
+VerificationTest[
+  Max[N @ Abs @ Differences[AR[-3, -1, 1/2]]] <= 1/2 + 10^-10,
+  True,
+  TestID -> "20e-NegAsc-StepUpperBound"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 21: Step Ranges - Both Neg Descending (both < 0, s<0)  *)
+(* ================================================================ *)
+
+VerificationTest[
+  Length[AR[-1, -3, -1/2]] > 0,
+  True,
+  TestID -> "21a-NegDesc-NonEmpty"
+]
+
+VerificationTest[
+  AllTrue[AR[-1, -3, -1/2], Negative],
+  True,
+  TestID -> "21b-NegDesc-AllNegative"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[-1, -3, -1/2]], GreaterEqual],
+  True,
+  TestID -> "21c-NegDesc-SortedDescending"
+]
+
+VerificationTest[
+  AR[-1, -3, -1/2] === Reverse[-AR[3, 1, -1/2]],
+  True,
+  TestID -> "21d-NegDesc-ReflectionProperty"
+]
+
+VerificationTest[
+  Max[N @ Abs @ Differences[AR[-1, -3, -1/2]]] <= 1/2 + 10^-10,
+  True,
+  TestID -> "21e-NegDesc-StepUpperBound"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 22: Step Ranges - Mixed Descending (r1>0>r2, s<0)      *)
+(* ================================================================ *)
+
+VerificationTest[
+  Length[AR[3, -2, -1/2]] > 0,
+  True,
+  TestID -> "22a-MixedDesc-NonEmpty"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[3, -2, -1/2]], GreaterEqual],
+  True,
+  TestID -> "22b-MixedDesc-SortedDescending"
+]
+
+VerificationTest[
+  MemberQ[AR[3, -2, -1/2], 0],
+  True,
+  TestID -> "22c-MixedDesc-ContainsZero"
+]
+
+VerificationTest[
+  Max[N @ Abs @ Differences[AR[3, -2, -1/2]]] <= 1/2 + 10^-10,
+  True,
+  TestID -> "22d-MixedDesc-StepUpperBound"
+]
+
+VerificationTest[
+  With[{r = AR[3, -2, -1/2]},
+    {First[r], Last[r]}],
+  {3, -2},
+  TestID -> "22e-MixedDesc-Endpoints"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 23: FareyRange with Negative/Mixed Arguments           *)
+(* ================================================================ *)
+
+VerificationTest[
+  Length[AR[-3, -1, 1/3, "FareyRange" -> True]] > 0,
+  True,
+  TestID -> "23a-Farey-BothNeg-NonEmpty"
+]
+
+VerificationTest[
+  AllTrue[AR[-3, -1, 1/3, "FareyRange" -> True], Negative],
+  True,
+  TestID -> "23b-Farey-BothNeg-AllNegative"
+]
+
+VerificationTest[
+  Length[AR[-3, -1, 1/3, "FareyRange" -> True]] >= Length[AR[-3, -1, 1/3]],
+  True,
+  TestID -> "23c-Farey-BothNeg-SupersetOfDefault"
+]
+
+VerificationTest[
+  Length[AR[-2, 3, 1/3, "FareyRange" -> True]] > 0,
+  True,
+  TestID -> "23d-Farey-Mixed-NonEmpty"
+]
+
+VerificationTest[
+  MemberQ[AR[-2, 3, 1/3, "FareyRange" -> True], 0],
+  True,
+  TestID -> "23e-Farey-Mixed-ContainsZero"
+]
+
+VerificationTest[
+  Length[AR[-2, 3, 1/3, "FareyRange" -> True]] >= Length[AR[-2, 3, 1/3]],
+  True,
+  TestID -> "23f-Farey-Mixed-SupersetOfDefault"
+]
+
+VerificationTest[
+  Length[AR[3, -2, -1/3, "FareyRange" -> True]] > 0,
+  True,
+  TestID -> "23g-Farey-NegStep-NonEmpty"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[3, -2, -1/3, "FareyRange" -> True]], GreaterEqual],
+  True,
+  TestID -> "23h-Farey-NegStep-SortedDescending"
+]
+
+VerificationTest[
+  Length[AR[-1, -3, -1/3, "FareyRange" -> True]] > 0,
+  True,
+  TestID -> "23i-Farey-BothNegDesc-NonEmpty"
+]
+
+VerificationTest[
+  Length[AR[-1, -3, -1/3, "FareyRange" -> True]] >= Length[AR[-1, -3, -1/3]],
+  True,
+  TestID -> "23j-Farey-BothNegDesc-SupersetOfDefault"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 24: WorkingPrecision Option                            *)
+(* ================================================================ *)
+
+VerificationTest[
+  AR[1, 3, 1/2, WorkingPrecision -> MachinePrecision] === AR[1, 3, 1/2],
+  True,
+  TestID -> "24a-WP-ExplicitDefault-SameResult"
+]
+
+VerificationTest[
+  Length[AR[0, 3, 1/2, WorkingPrecision -> 50]] > 0,
+  True,
+  TestID -> "24b-WP-HighPrecision-NonEmpty"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[0, 3, 1/2, WorkingPrecision -> 50]]],
+  True,
+  TestID -> "24c-WP-HighPrecision-Sorted"
+]
+
+VerificationTest[
+  OrderedQ[N[AR[-2, 3, 1/2, WorkingPrecision -> 100]]],
+  True,
+  TestID -> "24d-WP-HighPrecision-Mixed-Sorted"
+]
+
+VerificationTest[
+  With[{diffs = N @ Abs @ Differences[AR[2, 7, 1/3, 1/4, WorkingPrecision -> 50]]},
+    Min[diffs] >= 1/4 - 10^-10 && Max[diffs] <= 1/3 + 10^-10],
+  True,
+  TestID -> "24e-WP-HighPrecision-FourArg-StepBounds"
+]
+
+(* ================================================================ *)
+(* TEST GROUP 25: Four-Argument Form - Negative/Mixed Arguments      *)
+(* ================================================================ *)
+
+VerificationTest[
+  Length[AR[-3, -1, 1/3, 1/4]] > 0,
+  True,
+  TestID -> "25a-FourArg-BothNeg-NonEmpty"
+]
+
+VerificationTest[
+  With[{test=AR[-3, -1, 1/3, 1/4] , expected = {-3, -(8/3), -((5 Sqrt[2])/3), -2, -Sqrt[3], -Sqrt[2], -(2/Sqrt[3])}},
+    test === expected
+  ]   ,
+  True,
+  TestID -> "25b-FourArg-BothNeg-StepBounds"
+]
+
+VerificationTest[
+  Length[AR[-2, 3, 1/3, 1/4]] > 0,
+  True,
+  TestID -> "25c-FourArg-Mixed-NonEmpty"
+]
+
+VerificationTest[
+  With[{test=AR[-2, 3, 1/3, 1/4] , expected = {-2, -Sqrt[3], -Sqrt[2], -(2/Sqrt[3]), -(2/3), -(1/3), 0, 1/3, 2/3, (2 Sqrt[2])/3, 4/3, 2 Sqrt[2/3], (4 Sqrt[2])/3, Sqrt[5], Sqrt[7], (4 Sqrt[5])/3}},
+    test === expected
+  ]   ,
+  True,
+  TestID -> "25d-FourArg-Mixed-StepBounds"
 ]
 
 EndTestSection[]

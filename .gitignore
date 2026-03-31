@@ -4,6 +4,7 @@
 # Wolfram / Mathematica
 *.mx
 *.wl~
+*.vsnb
 .Mathematica/
 FrontEnd/
 

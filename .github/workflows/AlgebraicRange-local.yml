@@ -21,7 +21,7 @@ jobs:
         run: |
           wolframscript -code '
             Print["Wolfram Engine ", $Version];
-            report = TestReport["Functions/AlgebraicRange/Tests/AlgebraicRange-tests.wlt"];
+            report = TestReport["Functions/AlgebraicRange/Tests/AlgebraicRange-1-1-0-tests.wlt"];
             Print["Tests run:    ", report["TestsSucceededCount"] + report["TestsFailedCount"]];
             Print["Passed:       ", report["TestsSucceededCount"]];
             Print["Failed:       ", report["TestsFailedCount"]];
