@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* ::Title:: *)
-(*AlgebraicRange (1.0.0)*)
+(*AlgebraicRange (1.1.0)*)
 
 
 (* ::Subtitle:: *)
@@ -67,21 +67,6 @@ formulaComplexityHeuristic[form_?NumericQ]:=
 			_Integer,{0,Infinity}]/. j_Integer?NonPositive:>-j+1
 				/.i_Integer:>Mean[1/2{5IntegerLength[i],digitSum[i],Total[Last/@FactorInteger[i]],Sqrt[Abs[N[i]]]}]]
 
-(*from ComplexityFunction documentation*)
-(*SimplifyCount[p_]:=
-Which[Head[p]===Symbol,1,
-IntegerQ[p],If[p\[Equal]0,1,Floor[N[Log[2,Abs[p]]/Log[2,10]]]+If[p>0,1,2]],
-Head[p]===Rational,SimplifyCount[Numerator[p]]+SimplifyCount[Denominator[p]]+1,
-Head[p]===Complex,SimplifyCount[Re[p]]+SimplifyCount[Im[p]]+1,NumberQ[p],2,
-True,SimplifyCount[Head[p]]+If[Length[p]\[Equal]0,0,Plus@@(SimplifyCount/@(List@@p))]]*)
-
-(*formulaComplexity[form_?NumericQ,opts:OptionsPattern[formulaComplexity]]:=
-	Switch[OptionValue[Method],
-		"BuiltIn",
-			SimplifyCount[form],
-		"Heuristic",
-			formulaComplexityHeuristic[form]]*)
-
 formulaComplexity[form_?NumericQ]:=
 	formulaComplexityHeuristic[form]		
 
@@ -137,8 +122,7 @@ fareyRange[r1_,r2_,r3_]:=
 		MatchQ[r3,Rational[-1,_]],
 			Reverse[ResourceFunction["FareyRange"][r2,r1,-1/r3]],
 		True,
-			failureFareyStep[r3]
-	]
+			failureFareyStep[r3]]
 
 
 (* ::Subsubsection::Closed:: *)
@@ -156,49 +140,67 @@ elemRange[{ord_},{r1_},opts:OptionsPattern[AlgebraicRange]]/;r1<1:=
 elemRange[{ord_},{r1_,r2_},opts:OptionsPattern[AlgebraicRange]]/;0<=r1<=r2:=
 	Range[r1^ord,r2^ord]^(1/ord)
 elemRange[{ord_},{r1_,r2_},opts:OptionsPattern[AlgebraicRange]]/;r1<0&&r2>=0:=
-	cleanSort[Join[-elemRange[{ord},{0,-r1},opts],elemRange[{ord},{0,r2},opts]],OptionValue[WorkingPrecision]]
+	Join[
+	-elemRange[{ord},{0,-r1},opts],
+	elemRange[{ord},{0,r2},opts]
+	]~cleanSort~OptionValue[WorkingPrecision]
 elemRange[{ord_},{r1_,r2_},opts:OptionsPattern[AlgebraicRange]]/;r1<=r2<=0:=
-	cleanSort[-elemRange[{ord},{-r2,-r1},opts],OptionValue[WorkingPrecision]]
+	cleanSort[
+	-elemRange[{ord},{-r2,-r1},opts],
+	OptionValue[WorkingPrecision]]
 elemRange[{ord_},{r1_,r2_},opts:OptionsPattern[AlgebraicRange]]/;r2<r1:=
 	{}
 
 elemRange[{ord_},{r1_,r2_,-1},opts:OptionsPattern[AlgebraicRange]]/;r1>=r2>=0:=
 	Range[r1^ord,r2^ord,-1]^(1/ord)
 elemRange[{ord_},{r1_,r2_,-1},opts:OptionsPattern[AlgebraicRange]]/;r2<0&&r1>=0:=
-	Reverse@cleanSort[Join[-elemRange[{ord},{-r2,0,-1},opts],elemRange[{ord},{r1,0,-1},opts]],OptionValue[WorkingPrecision]]
+	Reverse@
+	cleanSort[
+		Join[
+			-elemRange[{ord},{-r2,0,-1},opts],
+			elemRange[{ord},{r1,0,-1},opts]],
+		OptionValue[WorkingPrecision]]
 elemRange[{ord_},{r1_,r2_,-1},opts:OptionsPattern[AlgebraicRange]]/;r2<=r1<=0:=
-	Reverse@cleanSort[-elemRange[{ord},{-r2,-r1,-1},opts],OptionValue[WorkingPrecision]]
+	Reverse@
+	cleanSort[
+		-elemRange[{ord},{-r2,-r1,-1},opts],
+		OptionValue[WorkingPrecision]]
 elemRange[{ord_},{r1_,r2_,-1},opts:OptionsPattern[AlgebraicRange]]/;r2>r1:=
 	{}
 
 (*the remaining definitions below are used only for the option "StepMethod"->"Root"*)
 
-
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;0<=r1<=r2&&r3>0:=
 	If[!OptionValue["FareyRange"],
 		Range[r1^ord,r2^ord,r3^ord]^(1/ord),
 		fareyRange[r1^ord,r2^ord,r3^ord]^(1/ord)]
-
-
+		
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<0&&r2>=0&&r3>0&&r3<=r2-r1:=
-	cleanSort[Join[-elemRange[{ord},{0,-r1,r3},opts],elemRange[{ord},{0,r2,r3},opts]],OptionValue[WorkingPrecision]]
+	cleanSort[
+		Join[
+			-elemRange[{ord},{0,-r1,r3},opts],
+			elemRange[{ord},{0,r2,r3},opts]],
+		OptionValue[WorkingPrecision]]
 
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<0&&r2>=0&&r3>0&&r3>r2-r1:=
 	{r1}
 
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<=r2<=0&&r3>0:=
 	-elemRange[{ord},{-r2,-r1,r3},opts]
-
-
+	
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;0<=r2<=r1&&r3<0:=
 	Range[r1^ord,r2^ord,-(-r3)^ord]^(1/ord)
 
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<0&&r1>=0&&r3<0&&Abs[r3]<=r1-r2:=
-	Reverse@cleanSort[Join[-elemRange[{ord},{-r2,0,r3},opts],elemRange[{ord},{r1,0,r3},opts]],OptionValue[WorkingPrecision]]
+	Reverse@
+		cleanSort[
+			Join[
+				-elemRange[{ord},{-r2,0,r3},opts],
+				elemRange[{ord},{r1,0,r3},opts]],
+			OptionValue[WorkingPrecision]]
+			
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<0&&r1>=0&&r3<0&&Abs[r3]>r1-r2:=
 	{r1}
-
-
 
 elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<=r1<=0&&r3<0:=
 	-elemRange[{ord},{-r1,-r2,-r3},opts]
@@ -216,17 +218,41 @@ elemRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<r2&&r3<=
 (* ::Input::Initialization:: *)
 ClearAll[factorRange]
 factorRange[{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]:=
-	Block[{max,as,one,wp=OptionValue[WorkingPrecision]},
-	max=Max[Abs[r1],Abs[r2]];
-	as=Abs[r3];
-	one=Max[1,as];
-	SortBy[DeleteDuplicatesBy[If[!OptionValue["FareyRange"],
-		Join[DeleteCases[Range[one,0,-as],1],Range[one,max,as]],
-		Join[DeleteCases[fareyRange[one,0,-as],1],fareyRange[one,max,as]]//failureThrow],N[#,wp]&],N[#,wp]&]]
+	Block[{max,as,one,zero,wp=OptionValue[WorkingPrecision]},
+		max=Max[Abs[r1],Abs[r2]];
+		as=Abs[r3];
+		one=Max[1,as];
+		zero=Which[
+				r3>0&&r1>0,
+					r1/max,
+				r3>0&&r1<=0,
+					0,
+				r3<0&&r2>0,
+					r2/max,
+				r3<0&&r2<=0,
+					0];
+		If[!OptionValue["FareyRange"],
+			If[r3>0,
+				Join[
+					Reverse@DeleteCases[Range[one,zero,-as],one],
+					Range[one,max,as]],
+				Join[
+					Reverse@Range[one,max,as],
+					DeleteCases[Range[one,zero,-as],one]]],
+			If[IntegerQ[as],
+				as=1/as];
+			If[r3>0,
+				Join[
+					Reverse@DeleteCases[fareyRange[one,zero,-as],one],
+					fareyRange[one,max,as]],
+				Join[
+					Reverse@fareyRange[one,max,as],
+					DeleteCases[fareyRange[one,zero,-as],one]]]//failureThrow]]
 
 
 (* ::Input::Initialization:: *)
 ClearAll[outerRange]
+
 outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<=r2&&r3>0&&r3<=Max[Abs[r1],Abs[r2]]:=
 	Block[{elrg,fcrg,i,j,curr,first,last,rg,flo,fhi,wp=OptionValue[WorkingPrecision]},
 	elrg=elemRange[{ord},{If[r3<=1,r1,r1/r3],r2},opts];
@@ -245,6 +271,7 @@ outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<=r2&&r3
 		For[j=first,j<=last,j++,
 			rg["Append",curr*fcrg[[j]]]]];
 	SortBy[DeleteDuplicatesBy[rg//Normal,N[#,wp]&],N[#,wp]&]]
+
 outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<=r1&&r3<0&&Abs[r3]<=Max[Abs[r1],Abs[r2]]:=
 	Block[{elrg,fcrg,i,j,curr,first,last,rg,flo,fhi,wp=OptionValue[WorkingPrecision]},
 	elrg=elemRange[{ord},{If[r3>=-1,r1,-r1/r3],r2,-1},opts];
@@ -256,13 +283,14 @@ outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<=r1&&r3
 		If[curr>0,
 			flo=r2/curr;fhi=r1/curr,
 			flo=r1/curr;fhi=r2/curr];
-		first=First@Nearest[fcrg->"Index",flo];
-		last=Last@Nearest[fcrg->"Index",fhi];
-		While[first<=Length[fcrg]&&fcrg[[first]]<flo,first++];
-		While[last>=1&&fcrg[[last]]>fhi,last--];
+		first=First@Nearest[fcrg->"Index",fhi];
+		last=Last@Nearest[fcrg->"Index",flo];
+		While[first<=Length[fcrg]&&fcrg[[first]]>fhi,first++];
+		While[last>=1&&fcrg[[last]]<flo,last--];
 		For[j=first,j<=last,j++,
 			rg["Append",curr*fcrg[[j]]]]];
 	ReverseSortBy[DeleteDuplicatesBy[rg//Normal,N[#,wp]&],N[#,wp]&]]
+
 outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<r1&&r3>=0:=
 	{}
 outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r1<=r2&&r3<=0:=
@@ -277,10 +305,10 @@ outerRange[{ord_},{r1_,r2_,r3_},opts:OptionsPattern[AlgebraicRange]]/;r2<=r1&&r3
 ClearAll[stepRange]
 stepRange[{ord_},{r1_,r2_,r3_:1},opts:OptionsPattern[AlgebraicRange]]:=
 	Which[
-	OptionValue["StepMethod"]==="Outer",
-		outerRange[{ord},{r1,r2,r3},opts],	
-	OptionValue["StepMethod"]==="Root",
-		elemRange[{ord},{r1,r2,r3},opts]]
+		OptionValue["StepMethod"]==="Outer",
+			outerRange[{ord},{r1,r2,r3},opts],	
+		OptionValue["StepMethod"]==="Root",
+			elemRange[{ord},{r1,r2,r3},opts]]
 
 
 (* ::Subsubsection::Closed:: *)
@@ -317,8 +345,11 @@ stepSelect[{},d_,t_:0]:=
 
 
 (* ::Input::Initialization:: *)
-restrictRange[main_,compl_,d_:0,wp_:MachinePrecision]:=
-	DeleteDuplicatesBy[If[d!=0,stepSelect[#,d],#]&[complexitySelect[main,compl]],N[#,wp]&]
+ClearAll[restrictRange]
+restrictRange[main_,compl_,d_?NumericQ,wp_:MachinePrecision]/;d>0:=
+	DeleteDuplicatesBy[stepSelect[complexitySelect[main,compl],d],N[#,wp]&]
+restrictRange[main_,compl_,0,wp_:MachinePrecision]:=
+	DeleteDuplicatesBy[complexitySelect[main,compl],N[#,wp]&]
 
 
 (* ::Subsection::Closed:: *)
@@ -332,7 +363,7 @@ Options[AlgebraicRange]={"RootOrder"->2,"FareyRange"->False,WorkingPrecision->Ma
 
 (*internal main function*)
 
-iAlgebraicRange[{ord_?NumericQ},{r1_,r2_,r3_:1},d_:0,opts:OptionsPattern[AlgebraicRange]]/;ord>=1:=
+iAlgebraicRange[{ord_?NumericQ},{r1_,r2_,r3_:1},d_:0,opts:OptionsPattern[AlgebraicRange]]/;ord>=1&&NumericQ[r3]&&d>=0:=
 	Block[{o,x,y,s,mainrange,fullrange},
 
 		{o,x,y,s}=realReplace/@{ord,r1,r2,r3};

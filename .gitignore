@@ -8,6 +8,11 @@
 .Mathematica/
 FrontEnd/
 
+# versions
+
+*AlgebraicRange-1-0-1*
+*AlgebraicRange-1-0-2*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
