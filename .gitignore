@@ -1,6 +1,6 @@
 # backup
 
-.bak
+*.bak
 
 # macOS
 .DS_Store
