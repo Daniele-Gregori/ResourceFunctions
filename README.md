@@ -1,11 +1,12 @@
 # Resource Functions
-The Resource Functions I have developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) categorize mainly as follows:
+The Resource Functions I have developed for the [Wolfram Function Repository](https://resources.wolframcloud.com/FunctionRepository/) categorize mainly as follows.
 
 
 * Functions for core computation:
 
   * [PartitionWhile](https://resources.wolframcloud.com/FunctionRepository/resources/PartitionWhile/): partition a list by a condition on the sublists;
 
+  * [LeafComplexity](https://resources.wolframcloud.com/FunctionRepository/resources/LeafComplexity/): compute a sum or other complexity measure over all atoms of an expression.
 
 * Functions for data manipulation and analysis:
 
@@ -13,7 +14,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [SpreadsheetTrace](https://resources.wolframcloud.com/FunctionRepository/resources/SpreadsheetTrace/): trace dependencies among spreadsheet formulas;
 
-  * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them;
+  * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them.
 
 
 * Functions for mathematical computation:
@@ -28,7 +29,7 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [ThermodynamicBetheAnsatzSolve](https://resources.wolframcloud.com/FunctionRepository/resources/ThermodynamicBetheAnsatzSolve/): solve integral equations of Thermodynamic Bethe Ansatz type (also in a [separate repository](https://github.com/Daniele-Gregori/ThermodynamicBetheAnsatz));
   
-  * [TranscendentalRange](https://resources.wolframcloud.com/FunctionRepository/resources/TranscendentalRange/): generate ranges of transcendental numbers;
+  * [TranscendentalRange](https://resources.wolframcloud.com/FunctionRepository/resources/TranscendentalRange/): generate ranges of transcendental numbers.
  
 
 * Functions for system management:
