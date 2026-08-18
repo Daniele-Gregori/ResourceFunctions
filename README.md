@@ -16,7 +16,6 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them.
 
-
 * Functions for mathematical computation:
 
   * [AlgebraicRange](https://resources.wolframcloud.com/FunctionRepository/resources/AlgebraicRange/): generate ranges of algebraic numbers;
@@ -31,6 +30,9 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
   
   * [TranscendentalRange](https://resources.wolframcloud.com/FunctionRepository/resources/TranscendentalRange/): generate ranges of transcendental numbers.
  
+* Functions for string computation:
+
+  * [StringStyleJoin](https://resources.wolframcloud.com/FunctionRepository/resources/StringStyleJoin/): join plain and styled strings.
 
 * Functions for system management:
 
