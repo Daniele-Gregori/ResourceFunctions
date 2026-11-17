@@ -14,6 +14,8 @@ The Resource Functions I have developed for the [Wolfram Function Repository](ht
 
   * [SpreadsheetTrace](https://resources.wolframcloud.com/FunctionRepository/resources/SpreadsheetTrace/): trace dependencies among spreadsheet formulas;
 
+  * [TransformRows]((https://resources.wolframcloud.com/FunctionRepository/resources/TransformRows/): transform selected rows of a tabular object;
+
   * [TransformTabular](https://resources.wolframcloud.com/FunctionRepository/resources/TransformTabular/): transform simultaneously all columns of a tabular or a selection of them.
 
 * Functions for mathematical computation:
